@@ -1,0 +1,17 @@
+{
+  "type": "crafting_shaped",
+  "group": "backpack",
+  "pattern": [
+    "   ",
+    " ww",
+    "  w"
+  ],
+  "key": {
+    "w": {
+      "item": "minecraft:oak_planks"
+    }
+  },
+  "result": {
+    "item": "minecraft:stick"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "rc",
+  "version": "${version}",
+
+  "name": "Recipe Conflicts",
+  "description": "Get rid of them recipe conflicts!",
+  "authors": [
+    "Mpcs"
+  ],
+  "contact": {
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.mpcs.ExampleMod"
+    ]
+  },
+  "mixins": [
+    "rc.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

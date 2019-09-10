@@ -1,0 +1,19 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [ "rc:sticc" ]
+  },
+  "criteria": {
+    "leath": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [ { "item": "minecraft:oak_planks" } ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "leath"
+    ]
+  ]
+}
