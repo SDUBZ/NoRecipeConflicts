@@ -2,6 +2,7 @@ package io.github.mpcs.mixin;
 
 		import io.github.mpcs.ICraftingTableContainer;
 		import io.github.mpcs.PacketData;
+		import net.minecraft.client.MinecraftClient;
 		import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
 		import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
 		import net.minecraft.container.BlockContext;
@@ -15,6 +16,7 @@ package io.github.mpcs.mixin;
 		import net.minecraft.item.ItemStack;
 		import net.minecraft.recipe.CraftingRecipe;
 		import net.minecraft.recipe.RecipeType;
+		import net.minecraft.server.MinecraftServer;
 		import net.minecraft.server.network.ServerPlayerEntity;
 		import net.minecraft.world.World;
 		import org.spongepowered.asm.mixin.Mixin;
@@ -37,8 +39,6 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 	@Shadow
 	private CraftingInventory craftingInv;
 
-
-
 	public CraftingTableContainerMixin(ContainerType containerType_1, int int_1) {
 		super(containerType_1, int_1);
 	}
@@ -57,7 +57,7 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 			this.sizz = items.size();
 			System.out.println(sizz);
 			if (items.size() > 0) {
-				CraftingRecipe craftingRecipe_1 = (CraftingRecipe)items.get(0);
+				CraftingRecipe craftingRecipe_1 = (CraftingRecipe)items.get(index);
 				if (craftingResultInventory_1.shouldCraftRecipe(world_1, serverPlayerEntity_1, craftingRecipe_1)) {
 					itemStack_1 = craftingRecipe_1.craft(craftingInventory_1);
 				}
@@ -65,7 +65,7 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 
 			craftingResultInventory_1.setInvStack(0, itemStack_1);
 			serverPlayerEntity_1.networkHandler.sendPacket(new GuiSlotUpdateS2CPacket(int_1, 0, itemStack_1));
-			serverPlayerEntity_1.networkHandler.sendPacket(new PacketData(sizz));
+			serverPlayerEntity_1.networkHandler.sendPacket(new PacketData(sizz, index));
 		}
 	}
 
@@ -75,7 +75,14 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 		return sizz;
 	}
 	public void setIndex(int i) {
-		//size = i;
+
+	}
+
+	public void move() {
+		index++;
+		if(index >= sizz)
+			index = 0;
+		newUpdateResult(this.syncId, this.player.getEntityWorld(), this.player, this.craftingInv, this.resultInv);
 	}
 
 	public void setScreen(CraftingTableScreen cts) {

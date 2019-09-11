@@ -20,7 +20,6 @@ public class ExampleMod implements ModInitializer, ClientModInitializer {
 			System.out.println("PACKET ARRIVED SERVER DATA: " + packetByteBuf.readInt());
 		}));
 
-
 		Registry.register(Registry.ITEM, new Identifier("rc", "small_backpack"), SMALL_BACKPACK);
 		System.out.println("Hello Fabric world!");
 	}

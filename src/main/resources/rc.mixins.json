@@ -6,7 +6,8 @@
   ],
   "client": [
     "CraftingTableContainerMixin",
-    "CraftingTableScreenMixin"
+    "CraftingTableScreenMixin",
+    "ServerPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
