@@ -9,7 +9,6 @@ import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen;
 import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
 import net.minecraft.client.gui.widget.ToggleButtonWidget;
 import net.minecraft.container.Container;
-import net.minecraft.container.CraftingTableContainer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -25,7 +24,6 @@ public abstract class CraftingTableScreenMixin extends AbstractContainerScreen  
     private Identifier SLOT_TEXTURE = new Identifier("rc", "textures/gui/button.png");
     private ToggleButtonWidget toggleButtonWidget;
     private int conflictingItems = 0;
-    private int counter = 0;
     private int indx;
     public CraftingTableScreenMixin(Container container_1, PlayerInventory playerInventory_1, Text text_1) {
         super(container_1, playerInventory_1, text_1);
@@ -43,7 +41,6 @@ public abstract class CraftingTableScreenMixin extends AbstractContainerScreen  
     private void render(int int_1, int int_2, float float_1, CallbackInfo ci) {
         toggleButtonWidget.render(int_1, int_2, float_1);
         TextRenderer textRenderer_1 = this.minecraft.getFontManager().getTextRenderer(MinecraftClient.DEFAULT_TEXT_RENDERER_ID);
-        //conflictingItems = ((ICraftingTableContainer)((CraftingTableContainer)this.getContainer())).getSize();
         textRenderer_1.drawStringBounded((indx+(conflictingItems > 0 ? 1 : 0)) + "/" + conflictingItems, (this.width-this.containerWidth)/2 + 134, (this.height-this.containerHeight)/2 +64, 26, 17);
     }
 
@@ -51,13 +48,7 @@ public abstract class CraftingTableScreenMixin extends AbstractContainerScreen  
     private void mouseClicked(double x, double y, int int_1, CallbackInfoReturnable<Boolean> cir) {
         if(x > toggleButtonWidget.x && x < toggleButtonWidget.x + 26)
             if(y > toggleButtonWidget.y && y < toggleButtonWidget.y + 17) {
-                System.out.println("Guzik KLIK");
-                System.out.println("LUST SIZE: " + ((ICraftingTableContainer)this.container).getSize());
-                counter++;
-                if(counter > 20)
-                    counter = 0;
-                ((ICraftingTableContainer)this.container).setIndex(counter);
-                MinecraftClient.getInstance().getNetworkHandler().sendPacket(new PacketSwitch(""));
+                MinecraftClient.getInstance().getNetworkHandler().sendPacket(new PacketSwitch());
             }
     }
 

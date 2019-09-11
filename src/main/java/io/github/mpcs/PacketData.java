@@ -1,8 +1,6 @@
 package io.github.mpcs;
 
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.container.ContainerProvider;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.util.PacketByteBuf;

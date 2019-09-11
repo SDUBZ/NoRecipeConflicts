@@ -33,8 +33,6 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 	@Shadow
 	private CraftingResultInventory resultInv;
 	@Shadow
-	private BlockContext context;
-	@Shadow
 	private PlayerEntity player;
 	@Shadow
 	private CraftingInventory craftingInv;
@@ -55,7 +53,6 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 			ItemStack itemStack_1 = ItemStack.EMPTY;
 			List<CraftingRecipe> items = world_1.getServer().getRecipeManager().getAllMatches(RecipeType.CRAFTING, craftingInventory_1, world_1);
 			this.sizz = items.size();
-			System.out.println(sizz);
 			if (items.size() > 0) {
 				CraftingRecipe craftingRecipe_1 = (CraftingRecipe)items.get(index);
 				if (craftingResultInventory_1.shouldCraftRecipe(world_1, serverPlayerEntity_1, craftingRecipe_1)) {
@@ -67,15 +64,6 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 			serverPlayerEntity_1.networkHandler.sendPacket(new GuiSlotUpdateS2CPacket(int_1, 0, itemStack_1));
 			serverPlayerEntity_1.networkHandler.sendPacket(new PacketData(sizz, index));
 		}
-	}
-
-	public int getSize() {
-		if(!this.player.getEntityWorld().isClient())
-			System.out.println("I GOT CALLEEDDDDDDDDDDDDD " + sizz);
-		return sizz;
-	}
-	public void setIndex(int i) {
-
 	}
 
 	public void move() {

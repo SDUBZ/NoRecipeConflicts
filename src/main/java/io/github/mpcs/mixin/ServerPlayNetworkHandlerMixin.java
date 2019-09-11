@@ -3,7 +3,6 @@ package io.github.mpcs.mixin;
 import io.github.mpcs.ICraftingTableContainer;
 import io.github.mpcs.IServerPlayNetworkHandler;
 import io.github.mpcs.PacketSwitch;
-import net.fabricmc.fabric.api.server.PlayerStream;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
