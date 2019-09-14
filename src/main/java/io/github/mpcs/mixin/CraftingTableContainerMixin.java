@@ -1,11 +1,12 @@
 package io.github.mpcs.mixin;
 
 		import io.github.mpcs.ICraftingTableContainer;
-		import io.github.mpcs.PacketData;
-		import net.minecraft.client.MinecraftClient;
-		import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
+        import io.github.mpcs.NoRecipeConflictsMod;
+        import io.netty.buffer.Unpooled;
+        import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+        import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+        import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
 		import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
-		import net.minecraft.container.BlockContext;
 		import net.minecraft.container.ContainerType;
 		import net.minecraft.container.CraftingContainer;
 		import net.minecraft.container.CraftingTableContainer;
@@ -14,11 +15,12 @@ package io.github.mpcs.mixin;
 		import net.minecraft.inventory.CraftingResultInventory;
 		import net.minecraft.inventory.Inventory;
 		import net.minecraft.item.ItemStack;
-		import net.minecraft.recipe.CraftingRecipe;
+        import net.minecraft.network.Packet;
+        import net.minecraft.recipe.CraftingRecipe;
 		import net.minecraft.recipe.RecipeType;
-		import net.minecraft.server.MinecraftServer;
 		import net.minecraft.server.network.ServerPlayerEntity;
-		import net.minecraft.world.World;
+        import net.minecraft.util.PacketByteBuf;
+        import net.minecraft.world.World;
 		import org.spongepowered.asm.mixin.Mixin;
 		import org.spongepowered.asm.mixin.Shadow;
 
@@ -59,10 +61,12 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 					itemStack_1 = craftingRecipe_1.craft(craftingInventory_1);
 				}
 			}
-
 			craftingResultInventory_1.setInvStack(0, itemStack_1);
 			serverPlayerEntity_1.networkHandler.sendPacket(new GuiSlotUpdateS2CPacket(int_1, 0, itemStack_1));
-			serverPlayerEntity_1.networkHandler.sendPacket(new PacketData(sizz, index));
+            PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
+            byteBuf.writeInt(sizz);
+            byteBuf.writeInt(index);
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(serverPlayerEntity_1, NoRecipeConflictsMod.PACKET_DATA, byteBuf);
 		}
 	}
 

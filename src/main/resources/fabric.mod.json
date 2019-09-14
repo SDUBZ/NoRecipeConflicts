@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "id": "rc",
+  "id": "norecipeconflicts",
   "version": "${version}",
 
-  "name": "Recipe Conflicts",
+  "name": "No Recipe Conflicts",
   "description": "Get rid of them recipe conflicts!",
   "authors": [
     "Mpcs"
   ],
   "contact": {
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/Mpcs/NoRecipeConflicts"
   },
 
   "license": "CC0-1.0",
@@ -18,11 +18,14 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.mpcs.ExampleMod"
+      "io.github.mpcs.NoRecipeConflictsMod"
+    ],
+    "client": [
+      "io.github.mpcs.NoRecipeConflictsMod"
     ]
   },
   "mixins": [
-    "rc.mixins.json"
+    "norecipeconflicts.mixins.json"
   ],
 
   "depends": {
