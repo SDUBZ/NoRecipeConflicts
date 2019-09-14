@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "norecipeconflicts",
-  "version": "${version}",
+  "version": "1.0.0",
 
   "name": "No Recipe Conflicts",
   "description": "Get rid of them recipe conflicts!",
@@ -13,7 +13,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/norecipeconflicts/icon.png",
 
   "environment": "*",
   "entrypoints": {

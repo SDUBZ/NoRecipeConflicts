@@ -1,30 +1,28 @@
 package io.github.mpcs.mixin;
 
-		import io.github.mpcs.ICraftingTableContainer;
-        import io.github.mpcs.NoRecipeConflictsMod;
-        import io.netty.buffer.Unpooled;
-        import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
-        import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-        import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
-		import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
-		import net.minecraft.container.ContainerType;
-		import net.minecraft.container.CraftingContainer;
-		import net.minecraft.container.CraftingTableContainer;
-		import net.minecraft.entity.player.PlayerEntity;
-		import net.minecraft.inventory.CraftingInventory;
-		import net.minecraft.inventory.CraftingResultInventory;
-		import net.minecraft.inventory.Inventory;
-		import net.minecraft.item.ItemStack;
-        import net.minecraft.network.Packet;
-        import net.minecraft.recipe.CraftingRecipe;
-		import net.minecraft.recipe.RecipeType;
-		import net.minecraft.server.network.ServerPlayerEntity;
-        import net.minecraft.util.PacketByteBuf;
-        import net.minecraft.world.World;
-		import org.spongepowered.asm.mixin.Mixin;
-		import org.spongepowered.asm.mixin.Shadow;
+import io.github.mpcs.ICraftingTableContainer;
+import io.github.mpcs.NoRecipeConflictsMod;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
+import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
+import net.minecraft.container.ContainerType;
+import net.minecraft.container.CraftingContainer;
+import net.minecraft.container.CraftingTableContainer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.inventory.CraftingResultInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.CraftingRecipe;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.PacketByteBuf;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 
-		import java.util.List;
+import java.util.List;
 
 @Mixin(CraftingTableContainer.class)
 public abstract class CraftingTableContainerMixin extends CraftingContainer implements ICraftingTableContainer {
