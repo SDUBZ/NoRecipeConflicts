@@ -7,7 +7,7 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen;
+import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CraftingTableScreen.class)
-public abstract class CraftingTableScreenMixin extends AbstractContainerScreen  implements ICraftingTableScreen {
+public abstract class CraftingTableScreenMixin extends ContainerScreen  implements ICraftingTableScreen {
 
     private Identifier SLOT_TEXTURE = new Identifier("norecipeconflicts", "textures/gui/button.png");
     private TexturedButtonWidget toggleButtonWidget;
@@ -55,7 +55,7 @@ public abstract class CraftingTableScreenMixin extends AbstractContainerScreen  
         else
             toggleButtonWidget.render(115, 60, 0);
         TextRenderer textRenderer_1 = this.minecraft.getFontManager().getTextRenderer(MinecraftClient.DEFAULT_TEXT_RENDERER_ID);
-        textRenderer_1.drawStringBounded((indx+(conflictingItems > 0 ? 1 : 0)) + "/" + conflictingItems, 129, 64, 26, 17);
+        textRenderer_1.drawTrimmed((indx+(conflictingItems > 0 ? 1 : 0)) + "/" + conflictingItems, 129, 64, 26, 17);
     }
 
     @Inject(at = @At("HEAD"), method = "mouseClicked", cancellable = true)

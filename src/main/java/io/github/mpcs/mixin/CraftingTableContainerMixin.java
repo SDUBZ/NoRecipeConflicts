@@ -5,7 +5,6 @@ import io.github.mpcs.NoRecipeConflictsMod;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.client.gui.screen.ingame.CraftingTableScreen;
-import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
 import net.minecraft.container.ContainerType;
 import net.minecraft.container.CraftingContainer;
 import net.minecraft.container.CraftingTableContainer;
@@ -14,6 +13,7 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.ContainerSlotUpdateS2CPacket;
 import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -60,7 +60,7 @@ public abstract class CraftingTableContainerMixin extends CraftingContainer impl
 				}
 			}
 			craftingResultInventory_1.setInvStack(0, itemStack_1);
-			serverPlayerEntity_1.networkHandler.sendPacket(new GuiSlotUpdateS2CPacket(int_1, 0, itemStack_1));
+			serverPlayerEntity_1.networkHandler.sendPacket(new ContainerSlotUpdateS2CPacket(int_1, 0, itemStack_1));
             PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
             byteBuf.writeInt(sizz);
             byteBuf.writeInt(index);
