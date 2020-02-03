@@ -1,1 +1,1 @@
-# A fabric mod removing recipe conflicts
+# A fabric mod adjusting recipe conflicts
